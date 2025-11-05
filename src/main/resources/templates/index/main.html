@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main 화면</title>
+    <style>
+        .navbar-brand {
+            background-color: #FFD54F;
+            color: white !important;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 10px;
+        }
+        .nav-link {
+            color: #996515 !important;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #5d4037 !important;
+        }
+        .navbar {
+            justify-content: center;
+        }
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-bottom: 20px;
+        }
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="layout/navi :: menu"></div> <!-- menu herder-->
+<div>
+    <h2>main</h2>
+
+</div>
+<div th:replace="layout/navi :: footer"></div> <!-- footer -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>
