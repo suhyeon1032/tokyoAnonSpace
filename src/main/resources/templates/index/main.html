@@ -1,48 +1,61 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>main 화면</title>
-    <style>
-        .navbar-brand {
-            background-color: #FFD54F;
-            color: white !important;
-            font-weight: bold;
-            padding: 8px 20px;
-            border-radius: 10px;
-        }
-        .nav-link {
-            color: #996515 !important;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #5d4037 !important;
-        }
-        .navbar {
-            justify-content: center;
-        }
-        footer {
-            margin-top: 60px;
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            padding-bottom: 20px;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>커뮤니티 메인</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="layout/navi :: menu"></div> <!-- menu herder-->
-<div>
-    <h2>main</h2>
 
-</div>
-<div th:replace="layout/navi :: footer"></div> <!-- footer -->
+<h1 class="main-title">東京クラス　커뮤니티 게시판</h1>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<section class="board-container">
+    <!-- 공지게시판 -->
+    <div class="board">
+        <h3>공지 게시판</h3>
+        <div class="post"><span>샘플 후기 18</span><span>2025.11.05</span></div>
+        <div class="post"><span>샘플 후기 17</span><span>2025.11.05</span></div>
+        <div class="post"><span>샘플 후기 16</span><span>2025.11.05</span></div>
+    </div>
 
+    <!-- 자유게시판 -->
+    <div class="board">
+        <h3>자유 게시판</h3>
+        <div class="post"><span>샘플 후기 18</span><span>2025.11.05</span></div>
+        <div class="post"><span>샘플 후기 17</span><span>2025.11.05</span></div>
+        <div class="post"><span>샘플 후기 16</span><span>2025.11.05</span></div>
+    </div>
+
+    <!-- 캘린더 -->
+    <div class="board calendar-box">
+        <h3>캘린더</h3>
+        <div class="calendar-inner">
+            <p class="today">TODAY</p>
+            <p id="date" class="date"></p>
+            <p id="day" class="day"></p>
+        </div>
+    </div>
+</section>
+
+<script>
+    function updateCalendar() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const date = String(now.getDate()).padStart(2, '0');
+      const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      const day = days[now.getDay()];
+
+      document.getElementById('date').textContent = `${year}.${month}.${date}`;
+      document.getElementById('day').textContent = day;
+    }
+
+    updateCalendar();
+    // 하루가 지나면 자동 갱신
+    setInterval(updateCalendar, 1000 * 60 * 60);
+</script>
 </body>
 </html>

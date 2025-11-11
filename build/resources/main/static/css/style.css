@@ -1,0 +1,138 @@
+        body {
+          background-color: #fffbe9;
+          font-family: "Pretendard", "Noto Sans KR", sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* 상단 메뉴 */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 30px 80px;
+        }
+
+        .nav-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .nav-button {
+          background-color: #ffd54f;
+          color: #7b5200;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 12px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .nav-title {
+          color: #7b5200;
+          font-size: 22px;
+          font-weight: bold;
+        }
+
+        .nav-right a {
+          text-decoration: none;
+          color: #7b5200;
+          font-weight: 600;
+          margin-left: 30px;
+        }
+
+        .nav-right a:hover {
+          text-decoration: underline;
+        }
+
+        /* 메인 타이틀 */
+        .main-title {
+          text-align: center;
+          font-size: 40px;
+          font-weight: 800;
+          color: #7b5200;
+          margin-top: 20px;
+          margin-bottom: 40px;
+        }
+
+        /* 게시판 영역 */
+        .board-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+          padding: 0 80px 80px;
+        }
+
+        .board {
+          background-color: #ffd54f;
+          border-radius: 20px;
+          padding: 30px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .board h3 {
+          color: #7b5200;
+          font-weight: 800;
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+
+        .post {
+          background-color: white;
+          border-radius: 12px;
+          padding: 14px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 14px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .post span {
+          color: #7b5200;
+          font-weight: 600;
+        }
+
+        /* 캘린더 */
+        .calendar-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .calendar-inner {
+          background-color: white;
+          border-radius: 16px;
+          text-align: center;
+          padding: 50px 30px;
+          width: 80%;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-inner p {
+          color: #7b5200;
+          margin: 10px 0;
+        }
+
+        .calendar-inner .today {
+          font-size: 26px;
+          font-weight: 800;
+        }
+
+        .calendar-inner .date {
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        .calendar-inner .day {
+          font-size: 18px;
+          font-weight: 800;
+        }
+
+        @media (max-width: 1000px) {
+          .board-container {
+            grid-template-columns: 1fr;
+          }
+        }
