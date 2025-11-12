@@ -9,7 +9,6 @@ public class CalendarPageController {
     // HTML 페이지 반환
     @GetMapping("/calendar")
     public String showCalendarPage() {
-        // src/main/resources/templates/calendar.html
-        return "calendar";
+        return "calendar/calendar";
     }
 }
