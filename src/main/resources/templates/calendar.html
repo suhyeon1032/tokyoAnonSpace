@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>캘린더 게시판</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+          background-color: #fff9e6; /* 크림색 배경 */
+          font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+          color: #5a3a00;
+        }
+
+        .navbar {
+          background-color: transparent;
+          padding: 1rem 4rem;
+        }
+
+        .navbar-brand {
+          background-color: #ffd54f;
+          color: #5a3a00;
+          font-weight: bold;
+          border-radius: 10px;
+          padding: 0.5rem 1rem;
+        }
+
+        .navbar-nav .nav-link {
+          color: #5a3a00;
+          font-weight: 600;
+          margin-right: 1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+          color: #c68c00;
+        }
+        .calendar-section {
+          background-color: white;
+          border-radius: 15px;
+          padding: 40px;
+          margin-top: 40px;
+          max-width: 1000px;
+          margin-left: auto;
+          margin-right: auto;
+          box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .calendar-title {
+          font-weight: bold;
+          font-size: 2rem;
+          color: #3E2723;
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .calendar-controls {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        table.calendar {
+          width: 100%;
+          table-layout: fixed;
+          border-collapse: collapse;
+        }
+        th, td {
+          text-align: center;
+          height: 90px;
+          vertical-align: top;
+          border: 1px solid #f7e9b0;
+        }
+        th {
+          background-color: #ffe082;
+          font-weight: bold;
+        }
+
+        .day {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          transition: background-color 0.2s ease;
+        }
+        .day:hover {
+          background-color: #FFD54F;
+          color: white;
+          cursor: pointer;
+        }
+
+        .memo-list {
+          font-size: 0.85rem;
+          margin-top: 4px;
+          color: #444;
+          text-align: left;
+          padding-left: 4px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">LOGO</a>
+        <div class="ms-3 fw-bold">커뮤니티</div>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">홈</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">공지게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="/calendar">캘린더</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Calendar Section -->
+<main class="calendar-section">
+    <h1 class="text-center mb-4">캘린더 게시판</h1>
+
+    <div class="calendar-controls text-center mb-3">
+        <select id="yearSelect" class="form-select d-inline-block w-auto"></select>
+        <select id="monthSelect" class="form-select d-inline-block w-auto ms-2"></select>
+        <button id="showCalendar" class="btn btn-warning ms-2">보기</button>
+    </div>
+
+    <table class="calendar">
+        <thead>
+        <tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>
+        </thead>
+        <tbody id="calendar-body"></tbody>
+    </table>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="memoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">일정 추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p id="selected-date" class="fw-bold mb-2"></p>
+                <textarea id="memoInput" class="form-control" rows="3" placeholder="내용을 입력하세요..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-warning" id="saveMemo">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const calendarBody = document.getElementById("calendar-body");
+    const modal = new bootstrap.Modal(document.getElementById('memoModal'));
+    const memoInput = document.getElementById("memoInput");
+    const selectedDate = document.getElementById("selected-date");
+    let activeDate = null;
+    let currentYear, currentMonth;
+
+    const today = new Date();
+    currentYear = today.getFullYear();
+    currentMonth = today.getMonth();
+
+    const yearSelect = document.getElementById("yearSelect");
+    const monthSelect = document.getElementById("monthSelect");
+    for (let y = currentYear - 5; y <= currentYear + 5; y++) {
+      const option = new Option(y + "년", y, y === currentYear);
+      yearSelect.appendChild(option);
+    }
+    for (let m = 0; m < 12; m++) {
+      const option = new Option((m + 1) + "월", m, m === currentMonth);
+      monthSelect.appendChild(option);
+    }
+
+    document.getElementById("showCalendar").addEventListener("click", () => {
+      currentYear = parseInt(yearSelect.value);
+      currentMonth = parseInt(monthSelect.value);
+      loadCalendar();
+    });
+
+    async function loadCalendar() {
+      const res = await fetch(`/api/calendar/${currentYear}/${currentMonth + 1}`);
+      const events = await res.json();
+      generateCalendar(currentYear, currentMonth, events);
+    }
+
+    function generateCalendar(year, month, events) {
+      calendarBody.innerHTML = "";
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+      let date = 1;
+
+      for (let i = 0; i < 6; i++) {
+        let row = document.createElement("tr");
+        for (let j = 0; j < 7; j++) {
+          let cell = document.createElement("td");
+          if (i === 0 && j < firstDay) cell.innerHTML = "";
+          else if (date > lastDate) break;
+          else {
+            // 수정 코드 (두 자리로 0패딩)
+const cellDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+            cell.innerHTML = `<div class="day" data-date="${cellDate}">${date}</div>`;
+
+            const memoList = events.filter(e => e.date === cellDate);
+            memoList.forEach(ev => {
+              const memoDiv = document.createElement("div");
+              memoDiv.className = "memo-list";
+              memoDiv.innerText = "• " + ev.content;
+              cell.appendChild(memoDiv);
+            });
+
+            date++;
+          }
+          row.appendChild(cell);
+        }
+        calendarBody.appendChild(row);
+      }
+
+      document.querySelectorAll(".day").forEach(day => {
+  day.addEventListener("click", async e => {
+    activeDate = e.target.dataset.date;
+    selectedDate.textContent = activeDate;
+
+    // 🟡 기존 일정 불러오기
+    const res = await fetch(`/api/calendar/day/${activeDate}`);
+    const events = await res.json();
+
+    // 첫 번째 일정이 있으면 내용 표시 (없으면 빈칸)
+    if (events.length > 0) {
+      memoInput.value = events.map(ev => ev.content).join("\n");
+    } else {
+      memoInput.value = "";
+    }
+
+    modal.show();
+  });
+});
+    }
+
+    document.getElementById("saveMemo").addEventListener("click", async () => {
+  const content = memoInput.value.trim();
+
+  // ✅ 백엔드에서 빈칸 여부를 판단하도록, 무조건 요청 보냄
+  await fetch("/api/calendar/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ date: activeDate, content })
+  });
+
+  modal.hide();
+  loadCalendar();
+});
+
+    loadCalendar();
+    document.addEventListener("DOMContentLoaded", () => {
+      // 현재 연도/월 기본값으로 로드
+      currentYear = today.getFullYear();
+      currentMonth = today.getMonth();
+      yearSelect.value = currentYear;
+      monthSelect.value = currentMonth;
+      loadCalendar();
+    });
+</script>
+</body>
+</html>
