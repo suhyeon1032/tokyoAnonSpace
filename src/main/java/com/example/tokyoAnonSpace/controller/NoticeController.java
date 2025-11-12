@@ -50,16 +50,16 @@ public class NoticeController {
     // 글 상세
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model) {
-        Notice r = noticeService.findById(id);
-        model.addAttribute("notice", r);
+        Notice notice = noticeService.findById(id);
+        model.addAttribute("notice", notice);
         return "notice/view";
     }
 
     // 글 수정 화면
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        Notice r = noticeService.findById(id);
-        model.addAttribute("notice", r);
+        Notice notice = noticeService.findById(id);
+        model.addAttribute("notice", notice);
         return "notice/edit";
     }
 

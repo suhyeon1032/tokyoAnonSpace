@@ -1,152 +1,47 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 등록</title>
-
-    <style>
-        body {
-            background-color: #fffbe9;
-            font-family: "Pretendard", "Noto Sans KR", sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 60px auto;
-            background-color: #fff;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        h1 {
-            color: #7b5200;
-            font-weight: 800;
-            font-size: 26px;
-            margin-bottom: 25px;
-        }
-
-        /* 입력폼 공통 */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        textarea {
-            width: 100%;
-            border: 1px solid #ffd54f;
-            border-radius: 10px;
-            padding: 10px 12px;
-            font-size: 15px;
-            color: #5a3a00;
-            outline: none;
-            transition: border-color 0.2s ease;
-            box-sizing: border-box; /* ✅ border 포함 계산 */
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus,
-        textarea:focus {
-            border-color: #ffcc33;
-            box-shadow: 0 0 4px rgba(255, 204, 51, 0.4);
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            color: #7b5200;
-            margin-bottom: 5px;
-        }
-
-        textarea {
-            height: 250px;
-            resize: none;
-            background-color: #fffef8;
-        }
-
-        /* 아이디 / 비밀번호 영역 */
-        .id-pass-group {
-            display: flex;
-            gap: 15px; /* 칸 간 간격 */
-            margin-bottom: 18px;
-        }
-
-        .id-pass-group .form-group {
-            flex: 1; /* 두 칸 균등 분할 */
-        }
-
-        /* 버튼 영역 */
-        .btn-group {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-cancel {
-            background-color: #f0efeb;
-            color: #5a3a00;
-        }
-
-        .btn-submit {
-            background-color: #ffd54f;
-            color: #7b5200;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 768px) {
-            .id-pass-group {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <title>게시글 수정</title>
+    <link rel="stylesheet" th:href="@{/css/edit.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div th:replace="layout/navi :: menu"></div>
 
+<!-- 게시글 수정 폼 -->
+<form th:action="@{'/free/' + ${board.id} + '/edit'}" method="post" class="edit-form">
+
     <!-- 아이디 / 비밀번호 -->
     <div class="id-pass-group">
         <div class="form-group">
-            <label for="userId">아이디:</label>
-            <input type="text" id="userId" placeholder="">
+            <label for="nickname">아이디:</label>
+            <input type="text" id="nickname" name="nickname" th:value="${board.nickname}" readonly>
         </div>
         <div class="form-group">
             <label for="password">비밀번호:</label>
-            <input type="password" id="password" placeholder="">
+            <input type="password" id="password" name="password" placeholder="비밀번호 입력" required>
         </div>
+    </div>
+
+    <!-- 제목 -->
+    <div class="form-group">
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" th:value="${board.title}" required>
     </div>
 
     <!-- 내용 -->
     <div class="form-group">
-        <textarea placeholder="이 게시물은 공식 문서 스타일의 본문입니다.
-사진 없이 텍스트로만 작성됩니다.
-줄바꿈과 문단이 보존되어 출력됩니다."></textarea>
+        <textarea name="content" rows="8" th:text="${board.content}" required></textarea>
     </div>
 
     <!-- 버튼 -->
     <div class="btn-group">
-        <button class="btn btn-cancel">취소</button>
-        <button class="btn btn-submit">등록</button>
+        <a th:href="@{'/free/' + ${board.id}}" class="btn btn-cancel">취소</a>
+        <button type="submit" class="btn btn-submit">수정 완료</button>
     </div>
-</div>
+</form>
+
 </body>
 </html>

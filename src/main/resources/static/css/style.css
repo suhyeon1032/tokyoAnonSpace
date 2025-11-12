@@ -1,50 +1,85 @@
-        body {
-          background-color: #fffbe9;
-          font-family: "Pretendard", "Noto Sans KR", sans-serif;
-          margin: 0;
-          padding: 0;
-        }
+        /* ====== 네비게이션 공통 스타일 ====== */
+                @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-        /* 상단 메뉴 */
-        .navbar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 30px 80px;
-        }
+                body {
+                    background-color: #fffbe9;
+                    font-family: 'Noto Sans KR', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
 
-        .nav-left {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
+                .navbar {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background-color: #fff3c4; /* 따뜻한 노랑 */
+                  padding: 12px 40px;
+                  height: 60px;
+                  box-sizing: border-box;
+                  border-bottom: 1px solid #f1e3b0;
+                  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                }
 
-        .nav-button {
-          background-color: #ffd54f;
-          color: #7b5200;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 12px;
-          font-weight: 600;
-          cursor: pointer;
-        }
+                /* ===== 왼쪽 영역 ===== */
+                .nav-left {
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                }
 
-        .nav-title {
-          color: #7b5200;
-          font-size: 22px;
-          font-weight: bold;
-        }
+                .nav-button {
+                  background-color: #ffcf48;
+                  border: none;
+                  border-radius: 6px;
+                  padding: 6px 12px;
+                  font-weight: 600;
+                  color: #5a4400;
+                  cursor: pointer;
+                  transition: 0.2s;
+                }
 
-        .nav-right a {
-          text-decoration: none;
-          color: #7b5200;
-          font-weight: 600;
-          margin-left: 30px;
-        }
+                .nav-button:hover {
+                  background-color: #ffd84f;
+                }
 
-        .nav-right a:hover {
-          text-decoration: underline;
-        }
+                .nav-title {
+                  font-size: 18px;
+                  font-weight: 700;
+                  color: #5a4400;
+                }
+
+                /* ===== 오른쪽 메뉴 ===== */
+                .nav-right a {
+                  text-decoration: none;
+                  color: #5a4400;
+                  margin-left: 22px;
+                  font-weight: 500;
+                  font-size: 15px;
+                  transition: 0.2s;
+                }
+
+                .nav-right a:hover {
+                  color: #8b6c00;
+                }
+
+                /* ===== 반응형 ===== */
+                @media (max-width: 768px) {
+                  .navbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    height: auto;
+                    padding: 12px 20px;
+                  }
+
+                  .nav-right {
+                    margin-top: 10px;
+                  }
+
+                  .nav-right a {
+                    margin: 0 12px 6px 0;
+                    display: inline-block;
+                  }
+                }
 
         /* 메인 타이틀 */
         .main-title {

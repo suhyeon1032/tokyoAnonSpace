@@ -1,0 +1,153 @@
+body {
+    background-color: #fffbe9;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    margin: 0;
+    padding: 0;
+    }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 60px auto;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #7b5200;
+            font-weight: 800;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        /* 게시글 상단 */
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notice-header-left {
+            font-weight: 700;
+            font-size: 18px;
+            color: #5a3a00;
+        }
+
+        .notice-header-right {
+            font-size: 14px;
+            color: #7b5200;
+            text-align: right;
+        }
+
+        .notice-header-right span {
+            margin-left: 5px;
+            font-weight: 600;
+        }
+
+        /* 본문 */
+        .notice-content {
+            border: 1px solid #ffd54f;
+            border-radius: 8px;
+            padding: 20px;
+            color: #5a3a00;
+            line-height: 1.6;
+            background-color: #fffef8;
+            margin-bottom: 25px;
+        }
+
+        /* 버튼 */
+        .btn-group {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background-color: #ffd54f;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-weight: 600;
+            color: #7b5200;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* 👍 👎 영역 */
+        .like-dislike {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0 40px 0;
+        }
+
+        .reaction-btn {
+            background-color: #ffd54f;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reaction-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .reaction-btn i {
+            font-size: 22px;
+            color: #7b5200;
+        }
+
+        .reaction-count {
+            font-size: 14px;
+            font-weight: 700;
+            color: #7b5200;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .comment-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* 이름 입력 칸 */
+.comment-form input[name="name"] {
+    width: 150px;  /* 🔹 기존보다 짧게 */
+    flex-shrink: 0; /* 크기 줄어드는 것 방지 */
+    border-radius: 8px; /* 둥글게 */
+    border: 1px solid #ffd54f;
+}
+
+/* 댓글 입력 칸 */
+.comment-form input:not([name="name"]) {
+    flex: 1;  /* 🔹 남는 공간을 전부 차지하게 */
+    border-radius: 8px; /* 둥글기 */
+    border: 1px solid #ffd54f;
+}
+
+/* 버튼 */
+.comment-form button {
+    background-color: #ffd54f;
+    border: none;
+    border-radius: 8px; /* 둥글게 */
+    padding: 8px 16px;
+    font-weight: 600;
+    color: #7b5200;
+    cursor: pointer;
+}
+}

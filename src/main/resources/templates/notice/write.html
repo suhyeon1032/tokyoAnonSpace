@@ -13,7 +13,7 @@
 <div class="container">
     <h1>게시글 등록</h1>
 
-    <form th:action="@{/free/write}" method="post">
+    <form th:action="@{/notice/write}" method="post">
 
         <!-- 제목 -->
         <div class="form-group">
@@ -39,7 +39,7 @@
 
         <!-- 버튼 -->
         <div class="btn-group">
-            <a th:href="@{/free}" class="btn cancel">취소</a>
+            <a th:href="@{/notice}" class="btn cancel">취소</a>
             <button type="submit" class="btn submit">등록</button>
         </div>
     </form>
