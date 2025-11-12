@@ -48,8 +48,12 @@
 
     <!-- 페이지네이션 -->
     <div class="pagination">
-        <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
+        <button th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+                th:text="${i + 1}"
+                th:classappend="${i == page.number} ? 'active' : ''"
+                th:onclick="'location.href=\'/free?page=' + ${i} + '\';'"
+                class="page-btn">
+        </button>
     </div>
 </div>
 </body>

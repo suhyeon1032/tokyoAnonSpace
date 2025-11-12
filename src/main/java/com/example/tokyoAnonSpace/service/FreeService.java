@@ -3,6 +3,8 @@ package com.example.tokyoAnonSpace.service;
 import com.example.tokyoAnonSpace.entity.Free;
 import com.example.tokyoAnonSpace.repository.FreeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +55,10 @@ public class FreeService {
     public void dislike(Long id) {
         Free board = findById(id);
         board.setDislikes(board.getDislikes() + 1);
+    }
+
+    // 페이징
+    public Page<Free> getFreeList(Pageable pageable) {
+        return freeRepository.findAll(pageable);
     }
 }

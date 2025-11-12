@@ -5,6 +5,10 @@ import com.example.tokyoAnonSpace.api.NoticeResponse;
 import com.example.tokyoAnonSpace.entity.Notice;
 import com.example.tokyoAnonSpace.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +24,15 @@ public class NoticeController {
 
     // 게시글 목록
     @GetMapping
-    public String list(Model model) {
+    public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Notice> noticePage = noticeService.getNoticeList(pageable);
         List<NoticeResponse> reviews = noticeService.findAll().stream()
                 .map(r -> new NoticeResponse(r.getId(), r.getNickname(), r.getTitle(), r.getContent(), r.getCreatedAt(), r.getUpdatedAt()))
                 .collect(Collectors.toList());
         model.addAttribute("reviews", reviews);
+        model.addAttribute("reviews", noticePage.getContent());
+        model.addAttribute("page", noticePage);
         return "notice/list";
     }
 

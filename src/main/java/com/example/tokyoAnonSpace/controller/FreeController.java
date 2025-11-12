@@ -2,8 +2,13 @@ package com.example.tokyoAnonSpace.controller;
 
 import com.example.tokyoAnonSpace.entity.Free;
 import com.example.tokyoAnonSpace.api.FreeRequest;
+import com.example.tokyoAnonSpace.entity.Notice;
 import com.example.tokyoAnonSpace.service.FreeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +22,15 @@ public class FreeController {
 
     private final FreeService freeService;
 
+    // 게시글 목록, 페이징
     @GetMapping
-    public String list(Model model) {
-        List<Free> boards = freeService.findAll();
-        model.addAttribute("boards", boards);
+    public String list(@RequestParam(defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("id").descending()); // 최신글 먼저
+        Page<Free> freePage = freeService.getFreeList(pageable);
+
+        model.addAttribute("reviews", freePage);
+        model.addAttribute("boards", freePage.getContent());
+        model.addAttribute("page", freePage);
         return "free/list";
     }
 
