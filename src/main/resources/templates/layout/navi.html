@@ -1,9 +1,101 @@
-<nav th:fragment="menu" >
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* ====== 네비게이션 공통 스타일 ====== */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+        body {
+          font-family: 'Noto Sans KR', sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #fff3c4; /* 따뜻한 노랑 */
+          padding: 12px 40px;
+          height: 60px;
+          box-sizing: border-box;
+          border-bottom: 1px solid #f1e3b0;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* ===== 왼쪽 영역 ===== */
+        .nav-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .nav-button {
+          background-color: #ffcf48;
+          border: none;
+          border-radius: 6px;
+          padding: 6px 12px;
+          font-weight: 600;
+          color: #5a4400;
+          cursor: pointer;
+          transition: 0.2s;
+        }
+
+        .nav-button:hover {
+          background-color: #ffd84f;
+        }
+
+        .nav-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #5a4400;
+        }
+
+        /* ===== 오른쪽 메뉴 ===== */
+        .nav-right a {
+          text-decoration: none;
+          color: #5a4400;
+          margin-left: 22px;
+          font-weight: 500;
+          font-size: 15px;
+          transition: 0.2s;
+        }
+
+        .nav-right a:hover {
+          color: #8b6c00;
+        }
+
+        /* ===== 반응형 ===== */
+        @media (max-width: 768px) {
+          .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+            height: auto;
+            padding: 12px 20px;
+          }
+
+          .nav-right {
+            margin-top: 10px;
+          }
+
+          .nav-right a {
+            margin: 0 12px 6px 0;
+            display: inline-block;
+          }
+        }
+    </style>
+</head>
+
+<!-- 📄 src/main/resources/templates/layout/navi.html -->
+<nav th:fragment="menu">
     <header class="navbar">
         <div class="nav-left">
-            <button class="nav-button">セヨン</button>
+            <button class="nav-button" th:onclick="|location.href='@{/main}'|">セヨン</button>
             <div class="nav-title">커뮤니티</div>
         </div>
+
         <div class="nav-right">
             <a th:href="@{/main}">홈</a>
             <a th:href="@{/notice/list}">공지게시판</a>
@@ -12,3 +104,5 @@
         </div>
     </header>
 </nav>
+
+</html>

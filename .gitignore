@@ -4,8 +4,79 @@
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# Gradle files
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+### Gradle ###
 .gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle-build/
+.gradle-cache/
+**/out/
+**/bin/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# IntelliJ project-specific
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+### Logs ###
+*.log
+logs/
+log/
+spring.log
+
+### OS-specific ###
+.DS_Store
+Thumbs.db
+
+### Uploaded files ###
+uploads/
+fileUploads/
+tmp/
+temp/
+
+### Environment ###
+.env
+.env.local
+.env.*.local
+
+### Eclipse (if used occasionally) ###
+.project
+.classpath
+.settings/
+
+### Node (if front uses npm) ###
+node_modules/
+dist/
+
+# Gradle cache lock files
+.gradle/**/*.lock
+.gradle/**/*.bin
 
 # node-waf configuration
 .lock-wscript
