@@ -1,4 +1,5 @@
 package com.example.tokyoAnonSpace.service;
+
 import com.example.tokyoAnonSpace.dto.CalendarDto;
 import com.example.tokyoAnonSpace.entity.Calendar;
 import com.example.tokyoAnonSpace.repository.CalendarRepository;
@@ -6,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +39,7 @@ public class CalendarService {
             calendarRepository.save(event);
         }
     }
+
     // 일정 저장 또는 수정
     public void saveOrUpdateEvent(LocalDate date, String content) {
         List<Calendar> existing = calendarRepository.findByDate(date);
@@ -59,7 +62,9 @@ public class CalendarService {
             calendarRepository.deleteAll(events);
         }
     }
+
     public List<Calendar> getEventsByDate(LocalDate date) {
         return calendarRepository.findByDate(date);
     }
+
 }

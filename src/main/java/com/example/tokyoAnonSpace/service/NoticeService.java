@@ -4,6 +4,7 @@ import com.example.tokyoAnonSpace.entity.Notice;
 import com.example.tokyoAnonSpace.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +52,9 @@ public class NoticeService {
     // 페이징
     public Page<Notice> getNoticeList(Pageable pageable) {
         return noticeRepository.findAll(pageable);
+    }
+
+    public List<Notice> getRecentNotices(Pageable pageable) {
+        return noticeRepository.findAllByOrderByCreatedAtDesc(pageable).getContent();
     }
 }
