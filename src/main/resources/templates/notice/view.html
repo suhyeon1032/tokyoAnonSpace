@@ -15,7 +15,7 @@
 <div th:replace="layout/navi :: menu"></div>
 
 <div class="container">
-    <h1>자유 게시판</h1>
+    <h1>공지 게시판</h1>
 
     <!-- 게시글 헤더 -->
     <div class="notice-header">
@@ -27,20 +27,16 @@
         </div>
     </div>
 
-    <!-- 수정/삭제 버튼 -->
+    <!-- 수정/삭제/목록 버튼 -->
     <div class="btn-group">
-        <a th:href="@{'/notice/' + ${notice.id} + '/edit'}" class="btn">수정</a>
+        <div class="btn-group">
+            <a th:href="@{'/notice/' + ${notice.id} + '/edit'}" class="btn">수정</a>
 
-<!--        <form th:action="@{'/notice/' + ${notice.id} + '/delete'}" method="post" style="display:inline;">-->
-<!--            <input type="password" name="password" placeholder="비밀번호 입력" required-->
-<!--                   style="padding:5px; border:1px solid #ccc; border-radius:4px;">-->
-<!--            <button type="submit" class="btn" style="background-color:#ffbdbd;">삭제</button>-->
-<!--        </form>-->
+            <button type="button" class="btn" onclick="openNoticeDeleteModal()">삭제</button>
 
-        <!-- ✅ 모달을 여는 버튼 -->
-        <button type="button" class="btn" style="background-color:#ffbdbd;" onclick="openNoticeDeleteModal()">삭제</button>
+            <a th:href="@{/notice}" class="btn">목록</a>
+        </div>
 
-        <a th:href="@{/notice}" class="btn">목록</a>
     </div>
 
     <!-- 본문 -->

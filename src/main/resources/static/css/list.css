@@ -46,6 +46,8 @@ input[type="text"] {
 }
 
 .btn {
+  font-size: 16px;  /* 검색 버튼과 동일한 폰트 크기 */
+  font-weight: 600; /* 검색 버튼과 동일 */
   background-color: #ffd54f;
   color: #7b5200;
   font-weight: 600;
