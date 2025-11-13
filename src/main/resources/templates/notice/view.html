@@ -31,11 +31,14 @@
     <div class="btn-group">
         <a th:href="@{'/notice/' + ${notice.id} + '/edit'}" class="btn">수정</a>
 
-        <form th:action="@{'/notice/' + ${notice.id} + '/delete'}" method="post" style="display:inline;">
-            <input type="password" name="password" placeholder="비밀번호 입력" required
-                   style="padding:5px; border:1px solid #ccc; border-radius:4px;">
-            <button type="submit" class="btn" style="background-color:#ffbdbd;">삭제</button>
-        </form>
+<!--        <form th:action="@{'/notice/' + ${notice.id} + '/delete'}" method="post" style="display:inline;">-->
+<!--            <input type="password" name="password" placeholder="비밀번호 입력" required-->
+<!--                   style="padding:5px; border:1px solid #ccc; border-radius:4px;">-->
+<!--            <button type="submit" class="btn" style="background-color:#ffbdbd;">삭제</button>-->
+<!--        </form>-->
+
+        <!-- ✅ 모달을 여는 버튼 -->
+        <button type="button" class="btn" style="background-color:#ffbdbd;" onclick="openNoticeDeleteModal()">삭제</button>
 
         <a th:href="@{/notice}" class="btn">목록</a>
     </div>
@@ -47,6 +50,34 @@
 
     
 </div>
+
+<!-- ✅ 공지사항 삭제 모달창 -->
+<div id="noticeDeleteModal"
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+     background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000;">
+    <div style="background:white; padding:20px; border-radius:8px; width:300px; text-align:center;">
+        <h3>비밀번호 확인</h3>
+        <form th:action="@{'/notice/' + ${notice.id} + '/delete'}" method="post">
+            <input type="password" name="password" placeholder="비밀번호 입력" required
+                   style="width:100%; margin-bottom:10px; padding:8px; border:1px solid #ccc; border-radius:4px;">
+            <div>
+                <button type="submit" class="btn" style="background-color:#ffbdbd;">삭제</button>
+                <button type="button" class="btn" style="background-color:#ccc;" onclick="closeNoticeDeleteModal()">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ✅ 모달 열기/닫기 스크립트 -->
+<script>
+    function openNoticeDeleteModal() {
+        document.getElementById('noticeDeleteModal').style.display = 'flex';
+    }
+
+    function closeNoticeDeleteModal() {
+        document.getElementById('noticeDeleteModal').style.display = 'none';
+    }
+</script>
 
 <!-- 아이콘 색상 스타일 -->
 <style>
