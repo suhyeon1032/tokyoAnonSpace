@@ -23,3 +23,48 @@
 
 본 프로젝트를 통해 **웹 애플리케이션의 전체 흐름을 이해하고**,  
 실제 서비스와 유사한 구조를 설계·구현하는 데 중점을 두었습니다.
+
+### 📅 CALENDAR
+
+| 컬럼명     | 타입        | 제약조건                 | 설명             |
+|-----------|-------------|--------------------------|------------------|
+| id        | BIGINT      | PK, AUTO_INCREMENT       | 일정 고유 ID     |
+| CAL_DATE  | DATE        | NOT NULL                 | 날짜             |
+| content   | VARCHAR/CLOB| NOT NULL                 | 일정 내용        |
+
+### 🗣 FREE (자유 게시판)
+
+| 컬럼명      | 타입            | 제약조건                     | 설명                   |
+|-------------|------------------|------------------------------|------------------------|
+| id          | BIGINT           | PK, AUTO_INCREMENT           | 게시글 ID              |
+| nickname    | VARCHAR(50)      | NOT NULL                     | 작성자 닉네임          |
+| password    | VARCHAR          | NOT NULL                     | 삭제/수정용 비밀번호   |
+| title       | VARCHAR(200)     | NOT NULL                     | 게시글 제목            |
+| content     | CLOB             | NOT NULL                     | 게시글 내용            |
+| created_at  | TIMESTAMP        | DEFAULT now(), NOT NULL      | 작성일                 |
+| updated_at  | TIMESTAMP        | DEFAULT now()                | 수정일                 |
+| likes       | INT              | DEFAULT 0                    | 추천 수                |
+| dislikes    | INT              | DEFAULT 0                    | 비추천 수              |
+
+### 💬 FREE_COMMENT (자유 게시판 댓글)
+
+| 컬럼명      | 타입            | 제약조건                       | 설명                       |
+|-------------|------------------|--------------------------------|----------------------------|
+| id          | BIGINT           | PK, AUTO_INCREMENT             | 댓글 ID                    |
+| board_id    | BIGINT           | FK (FREE.id)                   | 연결된 게시글              |
+| nickname    | VARCHAR(50)      | NOT NULL                       | 댓글 작성자                |
+| password    | VARCHAR          | NOT NULL                       | 댓글 삭제용 비밀번호       |
+| content     | CLOB             | NOT NULL                       | 댓글 내용                  |
+
+### 📢 NOTICE (공지 게시판)
+
+| 컬럼명        | 타입            | 제약조건                     | 설명                     |
+|---------------|------------------|------------------------------|--------------------------|
+| id            | BIGINT           | PK, AUTO_INCREMENT           | 공지글 ID                |
+| nickname      | VARCHAR(50)      | NOT NULL                     | 작성자 닉네임            |
+| password      | VARCHAR          | NOT NULL                     | 비밀번호(삭제/수정용)    |
+| title         | VARCHAR(200)     | NOT NULL                     | 공지 제목                |
+| content       | CLOB             | NOT NULL                     | 공지 내용                |
+| created_at    | TIMESTAMP        | DEFAULT now(), NOT NULL      | 작성일                   |
+| updated_at    | TIMESTAMP        | DEFAULT now()                | 수정일                   |
+
