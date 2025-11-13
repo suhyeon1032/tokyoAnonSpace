@@ -82,6 +82,13 @@ public class FreeController {
         return "redirect:/free";
     }
 
+    // 삭제 기능 수정
+    @PostMapping("/{id}/check-password")
+    @ResponseBody
+    public boolean checkPassword(@PathVariable Long id, @RequestParam String password) {
+        return freeService.checkPassword(id, password);
+    }
+
     @PostMapping("/{id}/like")
     public String like(@PathVariable Long id) {
         freeService.like(id);

@@ -167,7 +167,7 @@ h1 {
 }
 
 /* 닉네임 입력칸 */
-.comment-form input[name="name"] {
+.comment-form input[name="nickname"] {
     width: 120px;   /* 🔥 비밀번호 칸도 줄여줌 */
         flex-shrink: 0;
         border-radius: 8px;
@@ -201,4 +201,47 @@ h1 {
     font-weight: 600;
     color: #7b5200;
     cursor: pointer;
+}
+
+/* 댓글 목록 전체 영역 */
+.comment-item {
+    display: flex;
+    align-items: center;              /* 세로 가운데 정렬 */
+    justify-content: space-between;   /* 좌우 정렬 */
+    gap: 10px;                        /* 요소 간 간격 */
+    border-bottom: 1px solid #ffe082; /* 구분선 */
+    padding: 10px 0;
+}
+
+/* 댓글 내용 부분 (닉네임 + 내용) */
+.comment-item p {
+    margin: 0;
+    flex: 1;                          /* 남은 공간 차지 */
+    color: #5a3a00;
+    font-size: 15px;
+}
+
+/* 비밀번호 입력칸 */
+.comment-item input[name="password"] {
+    border: 1px solid #ffd54f;
+    border-radius: 6px;
+    padding: 5px 8px;
+    width: 120px;
+    font-size: 14px;
+}
+
+/* 댓글 삭제 버튼 */
+.comment-item .btn-delete-comment {
+    background-color: #ffd54f;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 600;
+    color: #7b5200;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.comment-item .btn-delete-comment:hover {
+    opacity: 0.85;
 }

@@ -12,6 +12,11 @@
 <div class="container">
     <h1>자유 게시판</h1>
 
+    <!-- 검색 영역 -->
+    <div class="search-bar">
+        <a th:href="@{/free/write}" class="btn">글쓰기</a>
+    </div>
+
     <!-- 게시판 테이블 -->
     <table>
         <thead>
@@ -38,7 +43,7 @@
 
     <!-- 페이지네이션 -->
     <div class="pagination">
-        <button th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+        <button th:each="i : ${#numbers.sequence(1, page.totalPages)}"
                 th:text="${i + 1}"
                 th:classappend="${i == page.number} ? 'active' : ''"
                 th:onclick="'location.href=\'/free?page=' + ${i} + '\';'"
