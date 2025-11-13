@@ -48,6 +48,12 @@ public class FreeService {
         freeRepository.delete(board);
     }
 
+    // 삭제 기능 수정
+    public boolean checkPassword(Long id, String password) {
+        Free free = findById(id);
+        return free.getPassword().equals(password);
+    }
+
     public void like(Long id) {
         Free board = findById(id);
         board.setLikes(board.getLikes() + 1);

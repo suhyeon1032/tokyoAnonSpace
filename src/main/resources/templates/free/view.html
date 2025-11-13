@@ -6,60 +6,41 @@
     <title>자유 게시판</title>
     <link rel="stylesheet" th:href="@{/css/viewStyle.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <!-- 아이콘 -->
     <script src="https://kit.fontawesome.com/4b9b5b1b6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-<!-- 공통 네비게이션 -->
 <div th:replace="layout/navi :: menu"></div>
 
 <div class="container">
     <h1>자유 게시판</h1>
 
-    <!-- 게시글 헤더 -->
     <div class="notice-header">
         <div class="notice-header-left" th:text="${board.title}">게시글 제목</div>
         <div class="notice-header-right">
-            작성자: <span th:text="${board.nickname}">닉네임</span> ｜
-            작성일: <span
+            작성자: <span th:text="${board.nickname}">닉네임</span> ｜ 작성일: <span
                 th:text="${board.createdAt != null ? #temporals.format(board.createdAt, 'yyyy-MM-dd HH:mm') : '-'}">2025.11.05</span>
         </div>
     </div>
 
-    <!-- 수정/삭제 버튼 -->
     <div class="btn-group">
-        <div class="btn-group">
-            <a th:href="@{'/free/' + ${board.id} + '/edit'}" class="btn">수정</a>
-
-            <button type="button" class="btn" onclick="openNoticeDeleteModal()">삭제</button>
-
-            <a th:href="@{/free}" class="btn">목록</a>
-        </div>
-
+        <a th:href="@{'/free/' + ${board.id} + '/edit'}" class="btn">수정</a>
+        <button type="button" class="btn" onclick="openNoticeDeleteModal()">삭제</button>
+        <a th:href="@{/free}" class="btn">목록</a>
     </div>
 
-    <!-- 본문 -->
-    <div class="notice-content" th:text="${board.content}">
-        게시글 내용이 여기에 표시됩니다.
-    </div>
+    <div class="notice-content" th:text="${board.content}">게시글 내용이 여기에 표시됩니다.</div>
 
-    <!-- 좋아요, 싫어요 버튼 -->
     <div class="like-dislike">
         <div class="like">
             <form th:action="@{'/free/' + ${board.id} + '/like'}" method="post">
-                <button type="submit" class="reaction-btn">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                </button>
+                <button type="submit" class="reaction-btn"><i class="fa-solid fa-thumbs-up"></i></button>
                 <div class="reaction-count" th:text="${board.likes}">0</div>
             </form>
         </div>
-
         <div class="dislike">
             <form th:action="@{'/free/' + ${board.id} + '/dislike'}" method="post">
-                <button type="submit" class="reaction-btn">
-                    <i class="fa-solid fa-thumbs-down"></i>
-                </button>
+                <button type="submit" class="reaction-btn"><i class="fa-solid fa-thumbs-down"></i></button>
                 <div class="reaction-count" th:text="${board.dislikes}">0</div>
             </form>
         </div>
@@ -68,45 +49,34 @@
     <!-- 댓글 영역 -->
     <div class="comment-section">
         <h3>댓글</h3>
-
-        <!-- 댓글 등록 폼 -->
         <form th:action="@{'/free/' + ${board.id} + '/freeComment/write'}" method="post" class="comment-form">
-            <input type="text" name="name" placeholder="닉네임" required>
+            <input type="text" name="nickname" placeholder="닉네임" required>
             <input type="password" name="password" placeholder="비밀번호" required>
             <input type="text" name="content" placeholder="댓글을 입력하세요." required>
             <button type="submit">등록</button>
         </form>
 
-        <!-- 댓글 목록 -->
-        <div th:if="${board.comments != null and !board.comments.isEmpty()}">
-            <div th:each="c : ${board.comments}" class="comment-item">
-                <p><strong th:text="${c.nickname}">닉네임</strong> :
-                    <span th:text="${c.content}">댓글 내용</span></p>
-                <form th:action="@{'/free/' + ${board.id} + '/freeComment/' + ${c.id} + '/delete'}" method="post"
-                      style="margin-top:5px;">
-                    <input type="password" name="password" placeholder="비밀번호 입력" required>
-                    <button type="submit" class="btn-delete-comment">삭제</button>
-                </form>
-            </div>
+        <div th:each="c : ${board.comments}" class="comment-item">
+            <p>
+                <strong th:text="${c.nickname}">닉네임</strong> |
+                <span th:text="${c.content}">댓글 내용</span>
+            </p>
+            <form th:action="@{'/free/' + ${board.id} + '/freeComment/' + ${c.id} + '/delete'}" method="post" class="comment-delete-form">
+                <input type="password" name="password" placeholder="비밀번호 입력" required>
+                <button type="submit" class="btn-delete-comment" >삭제</button>
+            </form>
         </div>
 
-        <!-- 댓글 없을 때 -->
         <p class="no-comment" th:if="${board.comments == null or board.comments.isEmpty()}">등록된 댓글이 없습니다.</p>
     </div>
 </div>
 
-<!-- ✅ 삭제 모달창 -->
-<div id="deleteModal"
-     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-     background:rgba(0,0,0,0.4); display:flex; justify-content:center; align-items:center; z-index:1000;">
-
+<!-- 게시글 삭제 모달 -->
+<div id="deleteModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000;">
     <div style="background:white; padding:20px; border-radius:8px; width:300px; text-align:center;">
         <h3>비밀번호 확인</h3>
-
-        <form th:action="@{'/free/' + ${board.id} + '/delete'}" method="post">
-            <input type="password" name="password" placeholder="비밀번호 입력" required
-                   style="width:100%; margin-bottom:10px; padding:8px; border:1px solid #ccc; border-radius:4px;">
-
+        <form id="deleteForm" th:action="@{'/free/' + ${board.id} + '/delete'}" method="post">
+            <input id="deletePassword" type="password" name="password" placeholder="비밀번호 입력" required style="width:100%; margin-bottom:10px; padding:8px; border:1px solid #ccc; border-radius:4px;">
             <div>
                 <button type="submit" class="btn" style="background-color:#ffbdbd;">삭제</button>
                 <button type="button" class="btn" style="background-color:#ccc;" onclick="closeDeleteModal()">취소</button>
@@ -115,19 +85,99 @@
     </div>
 </div>
 
-
-<!-- ✅ 모달 열기/닫기 스크립트 -->
+<!-- 모달 열기/닫기 -->
 <script>
-    function openDeleteModal() {
+    function openNoticeDeleteModal() {
         document.getElementById('deleteModal').style.display = 'flex';
     }
-
     function closeDeleteModal() {
         document.getElementById('deleteModal').style.display = 'none';
     }
 </script>
 
-<!-- 아이콘 색상 스타일 -->
+<!-- 삭제 기능: 게시글 + 댓글 -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 게시글 삭제
+        const deleteForm = document.querySelector("#deleteForm");
+        const passwordInput = document.querySelector("#deletePassword");
+
+        let errorMsg = document.querySelector("#passwordError");
+        if (!errorMsg) {
+            errorMsg = document.createElement("p");
+            errorMsg.id = "passwordError";
+            errorMsg.style.color = "red";
+            errorMsg.style.fontSize = "0.9em";
+            errorMsg.style.marginTop = "4px";
+            errorMsg.style.display = "none";
+            passwordInput.insertAdjacentElement("afterend", errorMsg);
+        }
+
+        deleteForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const password = passwordInput.value.trim();
+            if(!password) return;
+
+            const response = await fetch(window.location.pathname + "/check-password", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ password })
+            });
+
+            const isCorrect = await response.json();
+            if(!isCorrect){
+                errorMsg.textContent = "비밀번호가 틀렸습니다.";
+                errorMsg.style.display = "block";
+                passwordInput.style.borderColor = "red";
+                passwordInput.focus();
+                passwordInput.value = "";
+            } else {
+                deleteForm.submit();
+            }
+        });
+
+        // 댓글 삭제
+        document.querySelectorAll(".comment-delete-form").forEach(form => {
+            form.addEventListener("submit", async e => {
+                e.preventDefault();
+                const input = form.querySelector("input[name=password]");
+                let msg = form.querySelector(".passwordError");
+                if(!msg){
+                    msg = document.createElement("p");
+                    msg.className = "passwordError";
+                    msg.style.color = "red";
+                    msg.style.fontSize = "0.9em";
+                    msg.style.marginTop = "4px";
+                    form.appendChild(msg);
+                }
+
+                const password = input.value.trim();
+                if(!password) return;
+
+                const response = await fetch(form.action + "/check-password", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({ password })
+                });
+
+                const isCorrect = await response.json();
+
+                if(!isCorrect){
+                    msg.textContent = "비밀번호가 틀렸습니다.";
+                    msg.style.display = "block";
+                    input.style.borderColor = "red";
+                    input.focus();
+                    input.value = "";
+                } else {
+                    form.submit();
+                }
+
+
+            });
+        });
+    });
+</script>
+
 <style>
     .reaction-btn i {
         font-size: 22px;

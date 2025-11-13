@@ -1,5 +1,6 @@
 package com.example.tokyoAnonSpace.service;
 
+import com.example.tokyoAnonSpace.entity.Free;
 import com.example.tokyoAnonSpace.entity.FreeComment;
 import com.example.tokyoAnonSpace.repository.FreeCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,23 @@ public class FreeCommentService {
     public void delete(Long commentId, String password) {
         FreeComment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
-        if (!comment.getPassword().equals(password)) {
+        boolean ifcomment = checkPassword(commentId,password);
+        if (!ifcomment) {
             throw new IllegalArgumentException("비밀번호가 틀립니다.");
+        }else{
+            commentRepository.delete(comment);
         }
-        commentRepository.delete(comment);
+    }
+
+    // find ID
+    public FreeComment findById(Long id) {
+        return commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+    }
+
+    // 삭제 기능 수정
+    public boolean checkPassword(Long commentId, String password) {
+        FreeComment comment = findById(commentId);
+        return comment.getPassword().equals(password);
     }
 }
