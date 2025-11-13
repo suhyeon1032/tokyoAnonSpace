@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>커뮤니티 메인</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
@@ -13,35 +13,58 @@
 <h1 class="main-title">東京クラス　커뮤니티 게시판</h1>
 
 <section class="board-container">
+
     <!-- 공지게시판 -->
     <div class="board">
-        <h3>공지 게시판</h3>
-        <div class="post"><span>샘플 후기 18</span><span>2025.11.05</span></div>
-        <div class="post"><span>샘플 후기 17</span><span>2025.11.05</span></div>
-        <div class="post"><span>샘플 후기 16</span><span>2025.11.05</span></div>
+        <h3><a th:href="@{/notice}">공지 게시판</a></h3>
+        <div th:each="notice, iStat : ${noticeList}">
+            <div class="post">
+                <a th:href="@{'/notice/' + ${notice.id}}">
+                    <span th:text="${notice.title}">공지 제목</span>
+                </a>
+                <span th:text="${#temporals.format(notice.createdAt, 'yyyy.MM.dd')}">날짜</span>
+            </div>
+        </div>
     </div>
 
     <!-- 자유게시판 -->
     <div class="board">
-        <h3>자유 게시판</h3>
-        <div class="post"><span>샘플 후기 18</span><span>2025.11.05</span></div>
-        <div class="post"><span>샘플 후기 17</span><span>2025.11.05</span></div>
-        <div class="post"><span>샘플 후기 16</span><span>2025.11.05</span></div>
+        <h3><a th:href="@{/free}">자유 게시판</a></h3>
+        <div th:each="free, iStat : ${freeList}">
+            <div class="post">
+                <a th:href="@{'/free/' + ${free.id}}">
+                    <span th:text="${free.title}">자유 제목</span>
+                </a>
+                <span th:text="${#temporals.format(free.createdAt, 'yyyy.MM.dd')}">날짜</span>
+            </div>
+        </div>
     </div>
 
-    <!-- 캘린더 -->
     <div class="board calendar-box">
-        <h3>캘린더</h3>
+        <h3><a th:href="@{/calendar}">캘린더</a></h3>
         <div class="calendar-inner">
             <p class="today">TODAY</p>
-            <p id="date" class="date"></p>
-            <p id="day" class="day"></p>
+
+            <div th:if="${todaySchedule != null and !#lists.isEmpty(todaySchedule)}">
+
+                <p class="date" th:text="${#temporals.format(today, 'yyyy.MM.dd')}"></p>
+
+                <!--                <p th:each="schedule : ${todaySchedule}" class="memo" th:text="${schedule.content}"></p>-->
+                <p th:each="schedule : ${todaySchedule}"
+                   class="memo"
+                   th:utext="${#strings.replace(schedule.content, '\n', '&lt;br/&gt;')}">
+                </p>
+            </div>
+            <div th:if="${todaySchedule == null or #lists.isEmpty(todaySchedule)}">
+                <p class="date" th:text="${#temporals.format(today, 'yyyy.MM.dd')}"></p>
+            </div>
+
         </div>
     </div>
 </section>
 
 <script>
-    function updateCalendar() {
+    <!--function updateCalendar() {
       const now = new Date();
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -51,7 +74,7 @@
 
       document.getElementById('date').textContent = `${year}.${month}.${date}`;
       document.getElementById('day').textContent = day;
-    }
+    }-->
 
     updateCalendar();
     // 하루가 지나면 자동 갱신

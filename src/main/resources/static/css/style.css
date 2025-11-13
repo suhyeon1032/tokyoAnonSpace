@@ -1,173 +1,214 @@
-        /* ====== 네비게이션 공통 스타일 ====== */
-                @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+/* ====== 기본 설정 ====== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-                body {
-                    background-color: #fffbe9;
-                    font-family: 'Noto Sans KR', sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }
+body {
+  background-color: #fffbe9;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-                .navbar {
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  background-color: #fff3c4; /* 따뜻한 노랑 */
-                  padding: 12px 40px;
-                  height: 60px;
-                  box-sizing: border-box;
-                  border-bottom: 1px solid #f1e3b0;
-                  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-                }
+/* ====== 네비게이션 ====== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff3c4;
+  padding: 12px 40px;
+  height: 60px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f1e3b0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
 
-                /* ===== 왼쪽 영역 ===== */
-                .nav-left {
-                  display: flex;
-                  align-items: center;
-                  gap: 10px;
-                }
+/* 왼쪽 영역 */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-                .nav-button {
-                  background-color: #ffcf48;
-                  border: none;
-                  border-radius: 6px;
-                  padding: 6px 12px;
-                  font-weight: 600;
-                  color: #5a4400;
-                  cursor: pointer;
-                  transition: 0.2s;
-                }
+.nav-button {
+  background-color: #ffcf48;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+  color: #5a4400;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-                .nav-button:hover {
-                  background-color: #ffd84f;
-                }
+.nav-button:hover {
+  background-color: #ffd84f;
+}
 
-                .nav-title {
-                  font-size: 18px;
-                  font-weight: 700;
-                  color: #5a4400;
-                }
+.nav-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #5a4400;
+}
 
-                /* ===== 오른쪽 메뉴 ===== */
-                .nav-right a {
-                  text-decoration: none;
-                  color: #5a4400;
-                  margin-left: 22px;
-                  font-weight: 500;
-                  font-size: 15px;
-                  transition: 0.2s;
-                }
+/* 오른쪽 메뉴 */
+.nav-right a {
+  text-decoration: none;
+  color: #5a4400;
+  margin-left: 22px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: 0.2s;
+}
 
-                .nav-right a:hover {
-                  color: #8b6c00;
-                }
+.nav-right a:hover {
+  color: #8b6c00;
+}
 
-                /* ===== 반응형 ===== */
-                @media (max-width: 768px) {
-                  .navbar {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    height: auto;
-                    padding: 12px 20px;
-                  }
+/* ===== 반응형 (네비게이션) ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 12px 20px;
+  }
 
-                  .nav-right {
-                    margin-top: 10px;
-                  }
+  .nav-right {
+    margin-top: 10px;
+  }
 
-                  .nav-right a {
-                    margin: 0 12px 6px 0;
-                    display: inline-block;
-                  }
-                }
+  .nav-right a {
+    margin: 0 12px 6px 0;
+    display: inline-block;
+  }
+}
 
-        /* 메인 타이틀 */
-        .main-title {
-          text-align: center;
-          font-size: 40px;
-          font-weight: 800;
-          color: #7b5200;
-          margin-top: 20px;
-          margin-bottom: 40px;
-        }
+/* ====== 메인 타이틀 ====== */
+.main-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  color: #7b5200;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
 
-        /* 게시판 영역 */
-        .board-container {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 40px;
-          padding: 0 80px 80px;
-        }
+/* ====== 게시판 컨테이너 ====== */
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0 80px 80px;
+  justify-content: center;
+}
 
-        .board {
-          background-color: #ffd54f;
-          border-radius: 20px;
-          padding: 30px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+/* ====== 게시판 공통 ====== */
+.board {
+  background-color: #ffd54f;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .board h3 {
-          color: #7b5200;
-          font-weight: 800;
-          font-size: 20px;
-          margin-bottom: 20px;
-        }
+.board h3 {
+  color: #7b5200;
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 
-        .post {
-          background-color: white;
-          border-radius: 12px;
-          padding: 14px 20px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 14px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
+.board h3 a {
+  /* 기본적으로 <h3>의 스타일을 상속받지만, <a>의 기본 꾸밈은 제거 */
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 부모(h3)의 색상을 상속 */
+}
 
-        .post span {
-          color: #7b5200;
-          font-weight: 600;
-        }
+/* ====== 게시글 (post) ====== */
+.post {
+  background-color: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: 0.2s;
+}
 
-        /* 캘린더 */
-        .calendar-box {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
 
-        .calendar-inner {
-          background-color: white;
-          border-radius: 16px;
-          text-align: center;
-          padding: 50px 30px;
-          width: 80%;
-          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        }
+.post a {
+  text-decoration: none;
+  color: #5a4400;
+  font-weight: 600;
+}
 
-        .calendar-inner p {
-          color: #7b5200;
-          margin: 10px 0;
-        }
+.post a:hover {
+  color: #8b6c00;
+}
 
-        .calendar-inner .today {
-          font-size: 26px;
-          font-weight: 800;
-        }
+.post span {
+  color: #7b5200;
+  font-weight: 600;
+}
 
-        .calendar-inner .date {
-          font-size: 20px;
-          font-weight: 700;
-        }
+/* ====== 캘린더 ====== */
+.calendar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-        .calendar-inner .day {
-          font-size: 18px;
-          font-weight: 800;
-        }
+.calendar-inner {
+  background-color: white;
+  border-radius: 16px;
+  text-align: center;
+  padding: 50px 30px;
+  width: 80%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
 
-        @media (max-width: 1000px) {
-          .board-container {
-            grid-template-columns: 1fr;
-          }
-        }
+.calendar-inner .memo {
+  /* 불필요한 위아래 여백을 제거합니다. */
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+
+  /* 폰트 크기, 색상 등은 그대로 유지합니다. (혹시 빠져있다면 추가) */
+  color: #7b5200; /* 예시 색상 */
+  font-size: 14px; /* 내용이 너무 크다면 줄입니다. */
+  font-weight: 500;
+  text-align: center; /* 왼쪽 정렬 */
+}
+
+.calendar-inner p {
+  color: #7b5200;
+  margin: 10px 0;
+}
+
+.calendar-inner .today {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.calendar-inner .date {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.calendar-inner .day {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ===== 반응형 (게시판) ===== */
+@media (max-width: 1000px) {
+  .board-container {
+    grid-template-columns: 1fr;
+    padding: 0 40px 60px;
+  }
+}

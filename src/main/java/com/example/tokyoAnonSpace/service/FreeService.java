@@ -4,6 +4,7 @@ import com.example.tokyoAnonSpace.entity.Free;
 import com.example.tokyoAnonSpace.repository.FreeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,5 +61,10 @@ public class FreeService {
     // 페이징
     public Page<Free> getFreeList(Pageable pageable) {
         return freeRepository.findAll(pageable);
+    }
+
+    // main페이지 연동
+    public List<Free> getRecentFrees(Pageable pageable) {
+        return freeRepository.findAllByOrderByCreatedAtDesc(pageable).getContent();
     }
 }
