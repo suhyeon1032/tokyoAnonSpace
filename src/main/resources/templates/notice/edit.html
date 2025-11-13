@@ -1,46 +1,49 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 등록</title>
-    <link rel="stylesheet" th:href="@{/css/edit.css}">
+    <title>게시글 수정</title>
+    <link rel="stylesheet" th:href="@{/css/writeStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
 <div th:replace="layout/navi :: menu"></div> <!-- 네비게이션 -->
+
 <div class="container">
-    <h1>게시글 등록</h1>
+    <h1>게시글 수정</h1>
 
-    <!-- 제목 -->
-    <div class="form-group">
-        <input type="text" placeholder="제목을 입력하세요.">
-    </div>
+    <form th:action="@{'/notice/' + ${notice.id} + '/edit'}" method="post">
 
-    <!-- 아이디 / 비밀번호 -->
-    <div class="id-pass-group">
+        <!-- 제목 -->
         <div class="form-group">
-            <label for="userId">아이디:</label>
-            <input type="text" id="userId" placeholder="">
+            <input type="text" id="title" name="title" th:value="${notice.title}" placeholder="제목을 입력하세요." required>
         </div>
+
+        <!-- 닉네임 / 비밀번호 -->
+        <div class="id-pass-group">
+            <div class="form-group">
+                <label for="nickname">닉네임:</label>
+                <input type="text" id="nickname" name="nickname" th:value="${notice.nickname}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
+            </div>
+        </div>
+
+        <!-- 내용 -->
         <div class="form-group">
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" placeholder="">
+            <textarea name="content" placeholder="게시글 내용을 입력하세요" th:text="${notice.content}" required></textarea>
         </div>
-    </div>
 
-    <!-- 내용 -->
-    <div class="form-group">
-        <textarea placeholder="이 게시물은 공식 문서 스타일의 본문입니다.
-사진 없이 텍스트로만 작성됩니다.
-줄바꿈과 문단이 보존되어 출력됩니다."></textarea>
-    </div>
-
-    <!-- 버튼 -->
-    <div class="btn-group">
-        <button class="btn btn-cancel">취소</button>
-        <button class="btn btn-submit">등록</button>
-    </div>
+        <!-- 버튼 -->
+        <div class="btn-group">
+            <a th:href="@{'/notice/' + ${notice.id}}" class="btn btn-cancel">취소</a>
+            <button type="submit" class="btn btn-submit">수정 완료</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

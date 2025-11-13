@@ -4,44 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 수정</title>
-    <link rel="stylesheet" th:href="@{/css/edit.css}">
+    <link rel="stylesheet" th:href="@{/css/writeStyle.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-<div th:replace="layout/navi :: menu"></div>
+<div th:replace="layout/navi :: menu"></div> <!-- 네비게이션 -->
 
-<!-- 게시글 수정 폼 -->
-<form th:action="@{'/free/' + ${board.id} + '/edit'}" method="post" class="edit-form">
+<div class="container">
+    <h1>게시글 수정</h1>
 
-    <!-- 아이디 / 비밀번호 -->
-    <div class="id-pass-group">
+    <form th:action="@{'/free/' + ${board.id} + '/edit'}" method="post">
+
+        <!-- 제목 -->
         <div class="form-group">
-            <label for="nickname">아이디:</label>
-            <input type="text" id="nickname" name="nickname" th:value="${board.nickname}" readonly>
+            <input type="text" id="title" name="title" th:value="${board.title}" placeholder="제목을 입력하세요." required>
         </div>
+
+        <!-- 닉네임 / 비밀번호 -->
+        <div class="id-pass-group">
+            <div class="form-group">
+                <label for="nickname">닉네임:</label>
+                <input type="text" id="nickname" name="nickname" th:value="${board.nickname}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
+            </div>
+        </div>
+
+        <!-- 내용 -->
         <div class="form-group">
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" placeholder="비밀번호 입력" required>
+            <textarea name="content" placeholder="게시글 내용을 입력하세요" th:text="${board.content}" required></textarea>
         </div>
-    </div>
 
-    <!-- 제목 -->
-    <div class="form-group">
-        <label for="title">제목:</label>
-        <input type="text" id="title" name="title" th:value="${board.title}" required>
-    </div>
-
-    <!-- 내용 -->
-    <div class="form-group">
-        <textarea name="content" rows="8" th:text="${board.content}" required></textarea>
-    </div>
-
-    <!-- 버튼 -->
-    <div class="btn-group">
-        <a th:href="@{'/free/' + ${board.id}}" class="btn btn-cancel">취소</a>
-        <button type="submit" class="btn btn-submit">수정 완료</button>
-    </div>
-</form>
-
+        <!-- 버튼 -->
+        <div class="btn-group">
+            <a th:href="@{'/free/' + ${board.id}}" class="btn btn-cancel">취소</a>
+            <button type="submit" class="btn btn-submit">수정 완료</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
