@@ -60,6 +60,8 @@ textarea {
     outline: none;             /* 브라우저 기본 아웃라인 제거 */
     transition: border-color 0.2s ease; /* focus 시 부드럽게 변경 */
     box-sizing: border-box;    /* padding+border 포함한 크기 계산 */
+    font-family: "Pretendard", "Noto Sans KR", sans-serif; /* 전체 폰트 지정 */
+
 }
 
 /* -------------------------------------------
