@@ -27,12 +27,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="b : ${reviews}">
-            <td th:text="${b.id}">1</td>
+        <tr th:each="b, iter : ${reviews}">
+            <td th:text="${page.totalElements - (page.number * page.size) - iter.index}"></td>
             <td>
-                <a th:href="@{'/notice/' + ${b.id}}" th:text="${b.title}">게시글 제목</a>
+                <a th:href="@{'/notice/' + ${b.id}}" th:text="${b.title}"></a>
             </td>
-            <td th:text="${b.createdAt != null ? #temporals.format(b.createdAt, 'yyyy-MM-dd HH:mm') : '-'}">2025.11.05
+            <td th:text="${b.createdAt != null ? #temporals.format(b.createdAt, 'yyyy-MM-dd HH:mm') : '-'}">
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(reviews)}">
@@ -42,14 +42,24 @@
     </table>
 
     <!-- 페이지네이션 -->
-    <div class="pagination">
+    <!--    <div class="pagination">-->
+    <!--        <button th:each="i : ${#numbers.sequence(1, page.totalPages)}"-->
+    <!--                th:text="${i + 1}"-->
+    <!--                th:classappend="${i == page.number} ? 'active' : ''"-->
+    <!--                th:onclick="'location.href=\'/notice?page=' + ${i} + '\';'"-->
+    <!--                class="page-btn">-->
+    <!--        </button>-->
+    <!--    </div>-->
+    <div class="pagination" th:if="${page.totalPages > 1}">
         <button th:each="i : ${#numbers.sequence(1, page.totalPages)}"
-                th:text="${i + 1}"
-                th:classappend="${i == page.number} ? 'active' : ''"
-                th:onclick="'location.href=\'/notice?page=' + ${i} + '\';'"
+                th:text="${i}"
+                th:classappend="${i == page.number + 1} ? 'active' : ''"
+                th:onclick="'location.href=\'/notice?page=' + ${i - 1} + '\';'"
                 class="page-btn">
         </button>
     </div>
+
+
 </div>
 </body>
 </html>
