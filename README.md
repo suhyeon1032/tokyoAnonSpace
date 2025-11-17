@@ -24,60 +24,6 @@
 본 프로젝트를 통해 **웹 애플리케이션의 전체 흐름을 이해하고**,  
 실제 서비스와 유사한 구조를 설계·구현하는 데 중점을 두었습니다.
 
-📂 Project Structure
-tokyoAnonSpace/
-├── api/                             # DTO 요청/응답 관련 클래스
-│   ├── FreeRequest.java
-│   ├── NoticeRequest.java
-│   └── NoticeResponse.java
-│
-├── controller/                      # 웹 요청을 처리하는 컨트롤러 계층
-│   ├── CalendarController.java           # 캘린더 API 컨트롤러
-│   ├── CalendarPageController.java       # 캘린더 페이지 렌더링
-│   ├── FreeController.java               # 자유게시판 CRUD 처리
-│   ├── FreeCommentController.java        # 자유게시판 댓글 처리
-│   ├── NoticeController.java             # 공지게시판 CRUD 처리
-│   ├── NoticeCommentController.java      # 공지게시판 댓글 처리
-│   └── MainController.java               # 메인 페이지 매핑
-│
-├── dto/                              # 데이터 전달용 객체 (Data Transfer Object)
-│   └── CalendarDto.java
-│
-├── entity/                           # 데이터베이스와 매핑되는 JPA 엔티티
-│   ├── Calendar.java
-│   ├── Free.java
-│   ├── FreeComment.java
-│   ├── Notice.java
-│   └── NoticeComment.java
-│
-├── repository/                       # DB 접근 계층 (Spring Data JPA Repository)
-│   ├── CalendarRepository.java
-│   ├── FreeRepository.java
-│   ├── FreeCommentRepository.java
-│   ├── NoticeRepository.java
-│   └── NoticeCommentRepository.java
-│
-├── service/                          # 비즈니스 로직 계층
-│   ├── CalendarService.java
-│   ├── FreeService.java
-│   ├── FreeCommentService.java
-│   ├── NoticeService.java
-│   ├── NoticeCommentService.java
-│   └── TokyoAnonSpaceApplication.java    # Spring Boot 실행 메인 클래스
-│
-├── resources/                        # 정적 리소스 및 설정 파일
-│   ├── static/                       # 정적 파일 (HTML, JS, CSS)
-│   │   └── calendar.html
-│   ├── templates/                    # Thymeleaf 템플릿 (선택 사용)
-│   └── application.properties        # DB 및 서버 설정
-│
-├── test/                             # 단위 및 통합 테스트 코드
-│
-├── .gitignore                        # Git 버전관리 제외 파일 목록
-├── .gitattributes                    # Git 속성 관리 설정
-├── build.gradle                      # Gradle 빌드 설정 파일
-└── gradlew                           # Gradle 실행 스크립트
-
 ### 📅 CALENDAR
 
 | 컬럼명     | 타입        | 제약조건                 | 설명             |
