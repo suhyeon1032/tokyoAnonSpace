@@ -123,3 +123,42 @@
 | created_at    | TIMESTAMP        | DEFAULT now(), NOT NULL      | 작성일                   |
 | updated_at    | TIMESTAMP        | DEFAULT now()                | 수정일                   |
 
+### 📙 결과물 정리
+- 메인 화면
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/e2f6b05a-db37-4c9e-9668-a5dd8439afb9" />
+
+- 공지 게시판 목록
+<img width="1900" height="905" alt="image" src="https://github.com/user-attachments/assets/8ab344a4-a7d6-4994-b6e8-fae36f93202d" />
+
+- 공지 게시판 상세 화면
+<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/4d77c015-631a-4598-b61d-c17cac72c2c8" />
+
+- 글 등록 화면(공통)
+<img width="1919" height="904" alt="image" src="https://github.com/user-attachments/assets/a2c6f7c4-277b-4b8b-b97b-10d07aaf6138" />
+
+- 글 수정 화면(공통)
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/e0130e63-d936-4345-89dd-c9cff82e88d2" />
+
+- 글 삭제 화면(공통) > 비밀번호 틀렸을 경우  
+<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/b4aa79d2-d7e1-4dca-9df7-c48ee9b32283" />
+
+- 자유 게시판 목록
+<img width="1906" height="899" alt="image" src="https://github.com/user-attachments/assets/09ed214b-c1dd-46dd-8dd8-584850f9c1c5" />
+
+- 자유 게시판 상세 화면
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/554138ce-1f72-42b4-9709-1206a44a4893" />
+
+- 자유 게시판 > 댓글 삭제
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/41828ec8-9480-4aee-be8c-dcba73b71da2" />
+
+- 캘린더 페이지
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/116f6560-3ef7-4614-9c11-b97d6fb70d28" />
+
+- 캘린더 > 게시글 등록
+<img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/f957c18b-33b1-4620-9d92-b8f7b1913f1c" />
+
+- 캘린더 > 날짜 변경
+<img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/c72dbbd6-3e37-4a91-9844-ab3797c4c248" />
+
+
+
